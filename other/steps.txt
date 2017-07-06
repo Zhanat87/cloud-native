@@ -1,0 +1,153 @@
+cd other && git clone https://github.com/lreimer/cloud-native-go
+
+https://hub.docker.com/r/zhanat87/cloud-native/
+https://github.com/Zhanat87/cloud-native
+
+ll
+
+docker build -t zhanat87/cloud-native:1.0.0 .
+docker images
+docker push zhanat87/cloud-native:1.0.0
+docker rmi <id>
+
+GOOS=linux GOARCH=amd64 go build && docker build -t zhanat87/cloud-native:1.1.0 .
+docker push zhanat87/cloud-native:1.1.0
+
+docker-compose up -d
+docker-compose ps
+docker logs cloudnative_microservice_1
+http://localhost:9090/
+http://localhost:8080/
+docker-compose stop
+docker-compose rm
+
+CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build && \
+docker build -t zhanat87/cloud-native:1.2.0 . && \
+docker push zhanat87/cloud-native:1.2.0 && \
+docker images | grep cloud-native
+
+kubectl cluster-info
+curl -Lo minikube https://storage.googleapis.com/minikube/releases/v0.20.0/minikube-linux-amd64 && chmod +x minikube && sudo mv minikube /usr/local/bin/
+minikube status
+minikube version
+https://github.com/kubernetes/minikube
+minikube start
+192.168.99.100
+minikube stop
+sudo service docker start
+
+https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/
+kubectl create -f https://rawgit.com/kubernetes/dashboard/master/src/deploy/kubernetes-dashboard.yaml
+
+minikube dashboard
+http://192.168.99.100:30000/#!/workload?namespace=default
+
+kubectl get nodes
+kubectl config get-contexts
+kubectl config use-context giantswarm-56v2s - error
+minikube docker-env
+eval $(minikube docker-env)
+kubectl cluster-info
+kubectl create -f k8s-pod.yml
+kubectl get pods
+kubectl describe pod cloud-native
+kubectl port-forward cloud-native 8080:8080
+http://localhost:8080/
+http://localhost:8080/api/books
+kubectl get pods --show-labels
+kubectl get pods -o wide -L env
+kubectl label pod cloud-native hello=world
+kubectl get pods -o wide -L hello
+kubectl label pod cloud-native env=prod --overwrite
+
+kubectl get ns
+kubectl get pods --namespace kube-system
+kubectl create -f k8s-namespace.yml
+kubectl create -f k8s-pod.yml --namespace cloud-native
+kubectl get pods
+kubectl get pods --namespace cloud-native
+kubectl delete -f k8s-namespace.yml
+kubectl delete pod cloud-native
+
+kubectl get pods,deployments,rs
+kubectl create -f k8s-deployment.yml
+after changes in k8s-deployment.yml:
+kubectl apply -f k8s-deployment.yml
+kubectl describe deployment cloud-native
+kubectl create -f k8s-service.yml
+kubectl get services
+smotret port iz etogo service:
+http://192.168.99.100:30450
+kubectl get pods
+
+in first terminal:
+kubectl get pods -w
+in second terminal:
+kubectl delete -f k8s-deployment.yml
+kubectl get pods,deployments,rs
+kubectl create -f k8s-deployment.yml --record=true
+kubectl scale deployment cloud-native --replicas=5
+kubectl get pods
+kubectl scale deployment cloud-native --replicas=3
+kubectl get pods
+kubectl rollout history deployment cloud-native
+kubectl get services
+kubectl set image deployment cloud-native cloud-native=zhanat87/cloud-native:1.1.0
+CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build && \
+docker build -t zhanat87/cloud-native:1.3.0 . && \
+docker push zhanat87/cloud-native:1.3.0 && \
+docker images | grep cloud-native
+kubectl set image deployment cloud-native cloud-native=zhanat87/cloud-native:1.3.0
+otkatit predidushee izmenenie:
+kubectl rollout undo deployment cloud-native
+
+kubectl delete -f k8s-deployment.yml
+minikube stop
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

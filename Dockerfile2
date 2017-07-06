@@ -1,0 +1,12 @@
+FROM golang:1.8-alpine
+
+MAINTAINER Iskakov Zhanat
+
+ENV SOURCES /go/src/github.com/Zhanat87/cloud-native/
+
+COPY . ${SOURCES}
+
+RUN cd ${SOURCES} && CGO_ENABLED=0 go install -a
+
+ENTRYPOINT cloud-native
+EXPOSE 8080

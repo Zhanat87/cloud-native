@@ -1,0 +1,17 @@
+version: '2'
+services:
+  microservice:
+    build: .
+    image: zhanat87/cloud-native:1.2.0
+    environment:
+      - PORT=9090
+    ports:
+      - "9090:9090"
+  nginx: # proxy server
+    image: "nginx:1.11.9"
+    environment:
+      - PORT=9090
+    ports:
+      - "8080:80"
+    links:
+      - microservice

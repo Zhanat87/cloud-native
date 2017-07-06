@@ -1,0 +1,11 @@
+FROM alpine:latest
+
+MAINTAINER Iskakov Zhanat <iskakov_zhanat@mail.ru>
+
+COPY ./cloud-native /cloud-native
+RUN chmod +x /app/cloud-native
+
+ENV PORT 8080
+EXPOSE 8080
+
+ENTRYPOINT /cloud-native
