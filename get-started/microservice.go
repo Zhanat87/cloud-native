@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/Zhanat87/cloud-native/api"
+	"github.com/Zhanat87/cloud-native/get-started/api"
 )
 
 func main() {
