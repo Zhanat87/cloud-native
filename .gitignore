@@ -15,5 +15,6 @@
 
 .idea/
 other
-.wercker/
-cloud-native
+get-started/.wercker/
+get-started/get-started
+advanced/advanced
