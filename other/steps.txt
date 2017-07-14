@@ -1,3 +1,5 @@
+cloud native getting started starts:
+
 cd other && git clone https://github.com/lreimer/cloud-native-go
 
 https://hub.docker.com/r/zhanat87/cloud-native/
@@ -103,6 +105,112 @@ kubectl rollout undo deployment cloud-native
 
 kubectl delete -f k8s-deployment.yml
 minikube stop
+
+
+cloud native advanced starts:
+https://hub.docker.com/r/zhanat87/cloud-native-advanced/
+docker build -t zhanat87/cloud-native-advanced:1.0.0 . && \
+docker push zhanat87/cloud-native-advanced:1.0.0 && \
+docker images | grep cloud-native-advanced
+docker run -p 8080:8080 zhanat87/cloud-native-advanced:1.0.0
+docker ps
+docker stop <container_id>
+
+docker-compose up -d
+docker-compose ps
+https://github.com/variadico/hellodocker
+docker-compose stop && docker-compose build && docker-compose up -d
+http://localhost
+
+create k8s-deployment.yml and k8s-service.yml
+minikube start && sudo service docker start
+minikube ip
+kubectl cluster-info
+minikube dashboard
+kubectl create -f kubernetes
+kubectl get pods,deployments,rs,services,ingresses
+kubectl describe deployment cloud-native-advanced
+kubectl get pods
+minikube service cloud-native-advanced
+kubectl scale deployment cloud-native-advanced --replicas=8
+
+https://github.com/cyrsis/GoSandBox/blob/master/AdvancedCloudNative/Frameworks/Gin-Web/kubernetes/k8s-ingress.yml
+
+docker build -t zhanat87/cloud-native-advanced:1.1.0 . && \
+docker push zhanat87/cloud-native-advanced:1.1.0 && \
+docker images | grep cloud-native-advanced
+
+cd Discovery/Consul/ && docker-compose up
+http://localhost:8500/ui
+http://localhost:8500/v1/catalog/services
+http://localhost:8500/v1/agent/services
+PUT http://localhost:8500/v1/agent/service/register
+vse dannie v faile Discovery/Consul/discovery.postman_collection.json
+http://localhost:8500/v1/health/service/gin-web
+
+cd Configuration/Consul/ && docker-compose up
+http://localhost:8500/ui/#/dc1/kv/
+
+cd advanced/Discovery/Simple
+go get github.com/hashicorp/consul/api
+https://github.com/cyrsis/GoSandBox/tree/master/AdvancedCloudNative/Discovery/Simple
+cd server && docker build -t simple-server:1.0.0 . && \
+cd ../client && docker build -t simple-client:1.0.0 . && \
+cd ../ && docker images
+docker-compose up
+docker ps - dlya nahozhdeniya id continerov, chtobi vivesti log oshibok esli est:
+docker logs <container_id>
+http://localhost:8500/ui
+http://localhost:8081/info
+check that consul not passing yet:
+docker ps
+fing simple-server container_id, than stop this container:
+docker stop <container_id>
+and look at consul
+than start it again and check at consul again:
+docker start <container_id>
+
+cd other && git clone https://github.com/cyrsis/GoSandBox.git
+
+cd advanced/Discovery/Kubernetes
+eval $(minikube docker-env)
+cd server && docker build -t simple-k8s-server:1.0.0 . && \
+cd ../client && docker build -t simple-k8s-client:1.0.0 . && \
+cd ../ && docker images
+docker-compose up
+http://localhost:9090/info
+minikube start
+kubectl apply -f .
+kubectl get pods,deployments,services,configmap
+minikube dashboard
+
+cd advanced/Communication
+minikube start && sudo service docker start && eval $(minikube docker-env)
+cd Go-Micro
+go get -u github.com/micro/micro && \
+go get github.com/micro/protobuf/proto && \
+go get -u github.com/micro/protobuf/protoc-gen-go && \
+go get github.com/micro/go-plugins/wrapper/breaker/hystrix && \
+go get github.com/afex/hystrix-go/hystrix
+cd server && docker build -t go-micro-server:1.0.0 . && \
+cd ../client && docker build -t go-micro-client:1.0.0 . && \
+cd ../ && docker images && docker-compose up
+http://localhost:8500/ui
+http://localhost:9002/hystrix/monitor?stream=http://go-micro-client:8081
+
+cd advanced/Communication/RabbitMQ
+cd producer && docker build -t rabbitmq-producer:1.0.0 . && \
+cd ../consumer && docker build -t rabbitmq-consumer:1.0.0 . && \
+cd ../ && docker images && docker-compose up
+
+cd advanced/Communication/Kafka
+go get github.com/Shopify/sarama
+cd producer && docker build -t kafka-producer:1.0.0 . && \
+cd ../subscriber && docker build -t kafka-subscriber:1.0.0 . && \
+cd ../ && docker images && docker-compose up
+
+
+
 
 
 

@@ -1,0 +1,11 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: cloud-native-advanced
+  labels:
+    app: cloud-native-advanced
+    tier: frontend
+spec:
+  backend:
+    serviceName: cloud-native-advanced
+    servicePort: 8080
